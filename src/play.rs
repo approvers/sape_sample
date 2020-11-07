@@ -4,10 +4,7 @@ use crate::exp::{BinaryOp, SyntaxError, Term};
 pub fn calculate(controller: &impl Controller, presenter: &impl Presenter) {
   let mut inputs = controller.get_inputs();
   match parse_add_sub(&mut inputs) {
-    Ok((term, _)) => {
-      eprintln!("{:?}", term);
-      presenter.show_result(term.calc())
-    }
+    Ok((term, _)) => presenter.show_result(term.calc()),
     Err(err) => presenter.show_error(err),
   }
 }
@@ -31,7 +28,6 @@ type ParseResult<'a> = Result<(Term, &'a [Input]), SyntaxError>;
 */
 
 fn parse_add_sub(tokens: &[Input]) -> ParseResult {
-  eprintln!("AddSub: {:?}", tokens);
   let (mut term, mut tokens) = parse_mul_div(tokens)?;
   loop {
     match tokens {
@@ -51,7 +47,6 @@ fn parse_add_sub(tokens: &[Input]) -> ParseResult {
 }
 
 fn parse_mul_div(tokens: &[Input]) -> ParseResult {
-  eprintln!("MulDiv: {:?}", tokens);
   let (mut term, mut tokens) = parse_factor(tokens)?;
   loop {
     match tokens {
@@ -71,7 +66,6 @@ fn parse_mul_div(tokens: &[Input]) -> ParseResult {
 }
 
 fn parse_factor(tokens: &[Input]) -> ParseResult {
-  eprintln!("Factor: {:?}", tokens);
   match tokens {
     [Input::Num(n), ..] => {
       return Ok((Term::Num(*n), &tokens[1..]));

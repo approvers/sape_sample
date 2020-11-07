@@ -8,7 +8,6 @@ fn string_to_tokens(string: &[char]) -> Vec<Input> {
   let mut num_buf = String::new();
   for raw_token in string {
     use Input::*;
-    eprint!("{}", raw_token);
     if raw_token.is_digit(10) || raw_token == &'.' {
       num_buf.push(*raw_token);
       continue;
