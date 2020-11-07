@@ -1,9 +1,9 @@
 mod abst;
 mod exp;
-mod op;
+mod play;
 mod skin;
 
-use op::calculate;
+use play::calculate;
 use skin::Console;
 
 fn main() {
