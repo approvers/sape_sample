@@ -37,7 +37,7 @@ fn string_to_tokens(string: &[char]) -> Vec<Input> {
 
 impl Controller for Console {
   fn get_inputs(&self) -> Vec<Input> {
-    println!("Input the expression with white-separated:");
+    println!("Input the expression:");
 
     let mut buffer = String::new();
     let stdin = std::io::stdin();
