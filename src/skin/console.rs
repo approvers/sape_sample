@@ -4,16 +4,17 @@ use crate::exp::SyntaxError;
 pub struct Console;
 
 fn string_to_tokens(string: &[char]) -> Vec<Input> {
+  use Input::*;
+
   let mut tokens = vec![];
   let mut num_buf = String::new();
   for raw_token in string {
-    use Input::*;
     if raw_token.is_digit(10) || raw_token == &'.' {
       num_buf.push(*raw_token);
       continue;
     }
     if !num_buf.is_empty() {
-      tokens.push(Input::Num(num_buf.parse().unwrap()));
+      tokens.push(Num(num_buf.parse().unwrap()));
       num_buf.clear();
     }
     tokens.push(match raw_token {
@@ -28,7 +29,7 @@ fn string_to_tokens(string: &[char]) -> Vec<Input> {
     });
   }
   if !num_buf.is_empty() {
-    tokens.push(Input::Num(num_buf.parse().unwrap()));
+    tokens.push(Num(num_buf.parse().unwrap()));
     num_buf.clear();
   }
   tokens
