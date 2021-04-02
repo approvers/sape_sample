@@ -29,9 +29,9 @@ fn case1() {
       Plus,
       Num(2.0),
       Division,
-      Num(1.0),
+      Num(2.0),
     ],
-    14.0,
+    13.0,
   );
   calculate(&mock, &mock);
 }
